@@ -29,6 +29,11 @@ class TestShapes(TestCore):
         self.assertTrue(np.allclose(pr.get_orientation(), [0.1, 0.2, 0.3]))
         self.assertTrue(np.allclose(pr.get_color(), [0.7, 0.8, 0.9]))
 
+    def test_import_shape(self):
+        ob = Shape.import_shape(
+            path.join(ASSET_DIR, 'cracker_box/textured_simple.obj'))
+        self.assertIsInstance(ob, Shape)
+
     def test_import_mesh(self):
         ob = Shape.import_mesh(
             path.join(ASSET_DIR, 'test_mesh_bowl.obj'))
@@ -55,6 +60,10 @@ class TestShapes(TestCore):
     def test_get_set_color(self):
         self.dynamic_cube.set_color([.5] * 3)
         self.assertEqual(self.dynamic_cube.get_color(), [.5] * 3)
+
+    def test_get_set_transparency(self):
+        self.dynamic_cube.set_transparency(0.6)
+        self.assertAlmostEqual(self.dynamic_cube.get_transparency(), 0.6)
 
     def test_get_set_mass(self):
         self.dynamic_cube.set_mass(3.5)
